@@ -9,3 +9,7 @@ class InvalidName(ValueError):
 class InvalidBirthday(ValueError):
     def __init__(self, msg='Invalid date format. Use DD.MM.YYYY', *args, **kwargs):
         super().__init__(msg, *args, **kwargs)
+
+class InvalidEmail(ValueError):
+    def __init__(self, msg='Invalid email', *args, **kwargs):
+        super().__init__(msg, *args, **kwargs)
