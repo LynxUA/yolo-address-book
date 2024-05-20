@@ -1,14 +1,16 @@
 import pickle
+from src.models.NoteBook import NoteBook
 from src.models.AddressBook import AddressBook
 
 
-class AddressBookManager:
+class BookManager:
     def __init__(self, filename):
         self.address_book:AddressBook | None = None
+        self.note_book:NoteBook | None = None
         self.opened = False
         self.filename = filename
 
-    def __enter__(self):
+    def __enter__(self): #TODO -> tuple[AddressBook, NoteBook]:
         self.opened = True
         try:
             with open(self.filename, "rb") as f:

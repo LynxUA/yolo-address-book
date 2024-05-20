@@ -1,8 +1,8 @@
 
-from src.AddressBookManager import AddressBookManager
 from src.constants import *
 from src.decorators import *
 from src.handlers import *
+from src.BookManager import BookManager
 
 @interrupt_error
 @input_error
@@ -30,7 +30,7 @@ def main():
         "birthdays": lambda contacts, *args: birthdays(contacts),
         "help": lambda contacts, *args: HELP,
     }
-    with AddressBookManager("contacts.bin") as contacts:
+    with BookManager("contacts.bin") as contacts: #TODO as (contacts, notes) - unpack tuple
         while True:
             try:
                 command, *args = parse_input()
