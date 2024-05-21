@@ -29,7 +29,7 @@ def main():
         "phone": lambda contacts, notes, *args: phone_contact(args, contacts),
         "add-birthday": lambda contacts, notes, *args: add_birthday(args, contacts),
         "show-birthday": lambda contacts, notes, *args: show_birthday(args, contacts),
-        "birthdays": lambda contacts, notes, *args: birthdays(contacts),
+        "birthdays": lambda contacts, notes, *args: birthdays(args, contacts),
         "add-note": lambda contacts, notes, *args: add_note(args, notes),
         "find-note": lambda contacts, notes, *args: find_note(args, notes),
         "all-notes": lambda contacts, notes, *args: all_notes(notes),

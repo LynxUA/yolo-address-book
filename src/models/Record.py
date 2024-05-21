@@ -1,11 +1,12 @@
-from src.models.fields import Birthday, Name, Phone
-
+from src.models.fields import Address, Birthday, Email, Name, Phone
 
 class Record:
     def __init__(self, name):
         self.name = Name(name)
         self.phones: list[Phone] = []
         self.birthday: Birthday | None = None
+        self.email = None
+        self.address = None
 
     # реалізація класу
     def add_phone(self, phone:str):
@@ -28,8 +29,14 @@ class Record:
     def add_birthday(self, birthday):
         self.birthday = Birthday(birthday)
 
+    def add_address(self, address):
+        self.address = Address(address)
+
+    def add_email(self, email):
+        self.email = Email(email)
+
     def __str__(self):
-        return f"Contact name: {self.name.value}, birthday: {self.birthday.value if self.birthday else None}, phones: {'; '.join(p.value for p in self.phones)}"
+        return f"Contact name: {self.name.value}, birthday: {self.birthday.value if self.birthday else None}, email: {self.email}, address:{self.address}, phones: {'; '.join(p.value for p in self.phones)}"
 
     #prints Record nicely in print(AddressBook)
     def __repr__(self) -> str:

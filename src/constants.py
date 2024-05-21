@@ -16,7 +16,7 @@ phone [username]                            : prints phone number for username
 all                                         : prints all saved contacts
 add-birthday [DD.MM.YYYY]                   : add birthday to the contact
 show-birthday [username]                    : show birthday of the contact
-birthdays                                   : show upcoming birthdays in the next 7 days
+birthdays [range]                           : show upcoming birthdays in the next 7 days or, if you provide range, in the next range days
 add-note [name] [text]                      : saves new note
 find-note [search_str]                      : find note which contains search_str in name or text
 all-notes                                   : prints all saved notes

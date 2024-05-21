@@ -18,7 +18,7 @@ class AddressBook(Book, UserDict[str, Record]):
     def delete(self, name:str):
         del self.data[name]
 
-    def get_upcoming_birthdays(self) -> list[Record]:
+    def get_upcoming_birthdays(self, range) -> list[Record]:
         upcoming_birthdays = []
         for record in self.data.values():
             if not record.birthday:
@@ -30,7 +30,7 @@ class AddressBook(Book, UserDict[str, Record]):
             if days_from_today < 0:
                 birthday_next_year = birthday_date.replace(year=datetime.now().year+1)
                 days_from_today = self.__get_days_from_today(birthday_next_year)
-            if days_from_today <= 7:
+            if days_from_today <= range:
                 upcoming_birthdays.append(record)
         return upcoming_birthdays
 

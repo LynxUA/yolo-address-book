@@ -30,5 +30,13 @@ class Birthday(Field):
             # та перетворіть рядок на об'єкт datetime
             date = datetime.strptime(value, "%d.%m.%Y").date()
             super().__init__(date)
-        except ValueError:
-            raise InvalidBirthday
+        except ValueError as ve:
+            raise InvalidBirthday from ve
+
+class Address(Field):
+    pass
+
+class Email(Field):
+    def __init__(self, value):
+        #TODO validation
+        super().__init__(value)
