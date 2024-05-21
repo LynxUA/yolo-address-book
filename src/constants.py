@@ -17,12 +17,17 @@ all                                         : prints all saved contacts
 add-birthday [DD.MM.YYYY]                   : add birthday to the contact
 show-birthday [username]                    : show birthday of the contact
 birthdays                                   : show upcoming birthdays in the next 7 days
+add-note [name] [text]                      : saves new note
+find-note [search_str]                      : find note which contains search_str in name or text
+all-notes                                   : prints all saved notes
+change-note [name] [text]                   : updates existing note
+delete-note [name]                          : delete existing note
 close, exit                                 : prints "Good bye!" and finishes bot
 help                                        : prints this help"""
 USE_HELP = "Use 'help' for more information"
 INFO = Fore.GREEN + "[INFO]" + Fore.RESET
 ERROR = Fore.RED + "[ERROR]" + Fore.RESET
 INVALID_COMMAND = ERROR + " Invalid command. " + USE_HELP
-NOT_EXISTS = ERROR + " Contact does not exists"
+NOT_EXISTS = ERROR + " This name does not exists"
 UNKNOWN = ERROR + " Unknow error happend. Please try again. " + USE_HELP
-UPDATED = INFO + " Contact {} successfully updated."
+UPDATED = INFO + " {class_name} {item_name} successfully updated."

@@ -7,7 +7,7 @@ from src.models.Record import Record
 def add_contact(args:list[str], contacts:AddressBook) -> str:
     name, phone, = args
     contact = contacts.find_by_name(name)
-    msg =  UPDATED.format(name)
+    msg =  UPDATED.format(class_name = "Contact",item_name = name)
     if not contact:
         contact = Record(name)
         contacts.add(contact)

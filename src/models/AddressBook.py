@@ -8,6 +8,10 @@ class AddressBook(Book, UserDict[str, Record]):
     def add(self, item:Record):
         self.data[item.name.value] = item
 
+    def get(self, name:str) -> Record | None:
+        return self.data.get(name)
+
+    #TODO: change impl to perform inclusive search and return list
     def find_by_name(self, name:str) -> Record | None:
         return self.data.get(name)
 

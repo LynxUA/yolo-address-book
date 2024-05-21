@@ -2,6 +2,8 @@
 from src.constants import *
 from src.decorators import *
 from src.handlers import *
+from src.models.NoteBook import NoteBook
+from src.notes_handlers import all_notes, add_note, change_note, delete_note, find_note
 from src.BookManager import BookManager
 
 @interrupt_error
@@ -18,23 +20,29 @@ def main():
     print(GREETING)
     #lambda accepts not used arguments to ignore extra arguments
     command_dict = {
-        "hello": lambda contacts, *args: "How can I help you?",
-        "close": lambda contacts, *args: exit(),
-        "exit": lambda contacts, *args: exit(),
-        "add": lambda contacts, *args: add_contact(args, contacts),
-        "all": lambda contacts, *args: all_contact(contacts),
-        "change": lambda contacts, *args: change_contact(args, contacts),
-        "phone": lambda contacts, *args: phone_contact(args, contacts),
-        "add-birthday": lambda contacts, *args: add_birthday(args, contacts),
-        "show-birthday": lambda contacts, *args: show_birthday(args, contacts),
-        "birthdays": lambda contacts, *args: birthdays(contacts),
-        "help": lambda contacts, *args: HELP,
+        "hello": lambda contacts, notes, *args: "How can I help you?",
+        "close": lambda contacts, notes, *args: exit(),
+        "exit": lambda contacts, notes, *args: exit(),
+        "add": lambda contacts, notes, *args: add_contact(args, contacts),
+        "all": lambda contacts, notes, *args: all_contact(contacts),
+        "change": lambda contacts, notes, *args: change_contact(args, contacts),
+        "phone": lambda contacts, notes, *args: phone_contact(args, contacts),
+        "add-birthday": lambda contacts, notes, *args: add_birthday(args, contacts),
+        "show-birthday": lambda contacts, notes, *args: show_birthday(args, contacts),
+        "birthdays": lambda contacts, notes, *args: birthdays(contacts),
+        "add-note": lambda contacts, notes, *args: add_note(args, notes),
+        "find-note": lambda contacts, notes, *args: find_note(args, notes),
+        "all-notes": lambda contacts, notes, *args: all_notes(notes),
+        "change-note": lambda contacts, notes, *args: change_note(args, notes),
+        "delete-note": lambda contacts, notes, *args: delete_note(args, notes),
+        "help": lambda contacts, notes, *args: HELP,
     }
+    notes = NoteBook()
     with BookManager("contacts.bin") as contacts: #TODO as (contacts, notes) - unpack tuple
         while True:
             try:
                 command, *args = parse_input()
-                print(command_dict[command](contacts, *args))
+                print(command_dict[command](contacts, notes, *args))
             except KeyError:
                 print(INVALID_COMMAND)
             except SystemExit:
