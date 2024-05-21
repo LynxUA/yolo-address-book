@@ -27,7 +27,7 @@ def main():
         "phone": lambda contacts, *args: phone_contact(args, contacts),
         "add-birthday": lambda contacts, *args: add_birthday(args, contacts),
         "show-birthday": lambda contacts, *args: show_birthday(args, contacts),
-        "birthdays": lambda contacts, *args: birthdays(contacts),
+        "birthdays": lambda contacts, *args: birthdays(args, contacts),
         "help": lambda contacts, *args: HELP,
     }
     with AddressBookManager("contacts.bin") as contacts:
