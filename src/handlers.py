@@ -68,8 +68,8 @@ def show_birthday(args:list[str], contacts:AddressBook):
 
 @input_error
 def birthdays(arg, contacts:AddressBook):
-    diapasone = int(arg[0]) if arg else 7
-    upcoming_birthdays = contacts.get_upcoming_birthdays(diapasone)
+    range = int(arg[0]) if arg else 7
+    upcoming_birthdays = contacts.get_upcoming_birthdays(range)
     if not contacts.data:
         return INFO + " You do not have any contacts saved"
     if not upcoming_birthdays:
