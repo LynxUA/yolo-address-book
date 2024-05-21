@@ -1,6 +1,5 @@
-import re
 from datetime import datetime
-from src.models.errors import InvalidBirthday, InvalidEmail, InvalidName, InvalidPhone
+from src.models.errors import InvalidBirthday, InvalidName, InvalidPhone
 
 class Field:
     def __init__(self, value):
@@ -33,13 +32,11 @@ class Birthday(Field):
             super().__init__(date)
         except ValueError as ve:
             raise InvalidBirthday from ve
-        
+
 class Address(Field):
-    def __init__(self, value):
-        super().__init__(value)
+    pass
 
 class Email(Field):
     def __init__(self, value):
-        if not re.fullmatch(r"", value):
-            raise InvalidEmail
+        #TODO validation
         super().__init__(value)
