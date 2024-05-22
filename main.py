@@ -26,6 +26,8 @@ def main():
         "change": lambda contacts, *args: change_contact(args, contacts),
         "phone": lambda contacts, *args: phone_contact(args, contacts),
         "add-birthday": lambda contacts, *args: add_birthday(args, contacts),
+        "add-email": lambda contacts, *args: add_email(args, contacts),
+        "add-address": lambda contacts, *args: add_address(args, contacts),
         "show-birthday": lambda contacts, *args: show_birthday(args, contacts),
         "birthdays": lambda contacts, *args: birthdays(args, contacts),
         "help": lambda contacts, *args: HELP,
