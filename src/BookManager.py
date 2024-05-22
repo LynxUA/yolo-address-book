@@ -18,12 +18,12 @@ class BookManager(Storage):
         self.opened = True
         data = super().load()
         if data:
-                self.address_book = AddressBook.from_dict(data)
-                self.note_book = NoteBook.from_dict(data)
+            self.address_book = AddressBook.from_dict(data)
+            self.note_book = NoteBook.from_dict(data)
         return self.address_book, self.note_book
 
     def __exit__(self, *args):
-      if self.opened:
+        if self.opened:
             self.opened = False
             address_book_data_to_save = self.address_book.to_dict()
             note_book_data_to_save = self.note_book.to_dict()
@@ -38,7 +38,7 @@ class BookManager(Storage):
                 data_to_save.update(note_book_data_to_save)
 
             if data_to_save:
-               super().save(data_to_save)
+                super().save(data_to_save)
 
 
 
