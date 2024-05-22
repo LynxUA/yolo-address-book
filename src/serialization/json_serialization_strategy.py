@@ -9,3 +9,4 @@ class JsonSerializationStrategy(SerializationStrategy):
 
     def deserialize(self, data: str) -> dict:
         return json.loads(data)
+    

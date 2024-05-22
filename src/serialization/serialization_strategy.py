@@ -8,3 +8,4 @@ class SerializationStrategy(ABC):
     @abstractmethod
     def deserialize(self, data: bytes):
         pass
+    

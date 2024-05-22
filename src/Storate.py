@@ -23,3 +23,4 @@ class Storage:
         except (FileNotFoundError):
             # Note: If file does not exist, return empty dictionary. We need it when we will handle the errors' messages
             return {}
+        
