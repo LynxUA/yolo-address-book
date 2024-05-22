@@ -55,4 +55,4 @@ class AddressBook(Book, UserDict[str, Record]):
         return {"address-book": {name: record.to_dict() for name, record in self.data.items()}} if self.data else None
 
 
-    
+
