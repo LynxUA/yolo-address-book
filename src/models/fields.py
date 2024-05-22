@@ -1,5 +1,6 @@
 from datetime import datetime
-from src.models.errors import InvalidBirthday, InvalidName, InvalidPhone
+import re
+from src.models.errors import InvalidBirthday, InvalidEmail, InvalidName, InvalidPhone
 
 class Field:
     def __init__(self, value):
@@ -38,5 +39,7 @@ class Address(Field):
 
 class Email(Field):
     def __init__(self, value):
-        #TODO validation
-        super().__init__(value)
+        if re.match(r"(^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$)", value):
+            super().__init__(value)
+        else:
+            raise InvalidEmail
