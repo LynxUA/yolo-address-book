@@ -23,3 +23,17 @@ class NoteBook(Book, UserDict[str, Note]):
 
     def get_by_name(self, name:str) -> Note:
         return self.data[name]
+    
+    @classmethod
+    def from_dict(cls, data):
+        note_book = cls()
+        book = data.get("note-book")
+        if not book:
+            return note_book
+        for name, note in book.items():
+            note_book[name] = Note.from_dict(name, note)
+        return note_book
+    
+    def to_dict(self) -> dict:
+        return { "note-book": {key: value.to_dict() for key, value in self.data.items()}} if self.data else None
+    

@@ -1,8 +1,9 @@
 
+# import pickle
+# from src.serialization.pickle_serialization_strategy import PickleSerializationStrategy
 from src.constants import *
 from src.decorators import *
 from src.handlers import *
-from src.models.NoteBook import NoteBook
 from src.notes_handlers import all_notes, add_note, change_note, delete_note, find_note
 from src.BookManager import BookManager
 
@@ -39,8 +40,9 @@ def main():
         "delete-note": lambda contacts, notes, *args: delete_note(args, notes),
         "help": lambda contacts, notes, *args: HELP,
     }
-    notes = NoteBook()
-    with BookManager("contacts.bin") as contacts: #TODO as (contacts, notes) - unpack tuple
+    # Note: The line of code above is used to make testing my feature easier. When you comment out the line of code below, you can run it insead of current line of code.
+    # BookManager("address_book.pkl", PickleSerializationStrategy(), "rb", "wb", pickle.PickleError)
+    with BookManager("address_book.json") as (contacts, notes):
         while True:
             try:
                 command, *args = parse_input()

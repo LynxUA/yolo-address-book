@@ -45,9 +45,12 @@ class AddressBook(Book, UserDict[str, Record]):
     def from_dict(cls, data):
         address_book = cls()
         book = data.get("address-book")
+        if not book:
+            return address_book
         for name, record in book.items():
             address_book[name] = Record.from_dict(name, record)
         return address_book
     
     def to_dict(self):
         return {"address-book": {name: record.to_dict() for name, record in self.data.items()}} if self.data else None
+    
