@@ -36,3 +36,16 @@ class Note():
 
     def exists_tag(self, tag:str) -> bool:
         return self.__tags.issuperset(tag)
+    
+    @classmethod
+    def from_dict(cls, name:str, data:dict):
+        note = cls(name, data["text"])
+        if data.get("tags"):
+            note.add_tags(*data["tags"])
+        return note
+    
+    def to_dict(self) -> dict:
+        return {"text": self.__text, "tags": list(self.__tags)} if self.__text else None
+    
+
+    
