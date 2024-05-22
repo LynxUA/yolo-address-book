@@ -28,6 +28,8 @@ def main():
         "change": lambda contacts, notes, *args: change_contact(args, contacts),
         "phone": lambda contacts, notes, *args: phone_contact(args, contacts),
         "add-birthday": lambda contacts, notes, *args: add_birthday(args, contacts),
+        "add-email": lambda contacts, notes,*args: add_email(args, contacts),
+        "add-address": lambda contacts, notes,*args: add_address(args, contacts),
         "show-birthday": lambda contacts, notes, *args: show_birthday(args, contacts),
         "birthdays": lambda contacts, notes, *args: birthdays(args, contacts),
         "add-note": lambda contacts, notes, *args: add_note(args, notes),
