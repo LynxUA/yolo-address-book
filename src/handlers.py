@@ -12,11 +12,12 @@ def add_contact(args:list[str], contacts:AddressBook) -> str:
         address = address + "".join(rest)
     if not name:
         raise ValueError
-    contact = contacts.find(name)
-    msg =  UPDATED.format(name)
+    contact = contacts.find_by_name(name)
+    msg =  UPDATED.format(class_name = "Contact",item_name = name)
+
     if not contact:
         contact = Record(name)
-        contacts.add_record(contact)
+        contacts.add(contact)
         msg = INFO + f" Contact {name} successfully created."
     if phone:
         contact.add_phone(phone)
@@ -34,7 +35,8 @@ def change_contact(args:list[str], contacts:AddressBook) -> str:
         address = address + " " + " ".join(rest)
     if not name or not old_phone or not new_phone:
         raise ValueError
-    contact = contacts.find(name)
+    contact = contacts.find_by_name(name)
+
     if not contact:
         raise KeyError
     contact.edit_phone(old_phone, new_phone)
@@ -42,12 +44,12 @@ def change_contact(args:list[str], contacts:AddressBook) -> str:
         contact.add_email(email)
     if address:
         contact.add_address(address)
-    return UPDATED.format(name)
+    return UPDATED.format(class_name = "Contact",item_name = name)
 
 @input_error
 def phone_contact(args:list[str], contacts:AddressBook) -> str:
     name, = args
-    contact = contacts.find(name)
+    contact = contacts.find_by_name(name)
     if not contact:
         raise KeyError
     return str(contact.phones)
@@ -71,20 +73,20 @@ def all_contact(contacts:AddressBook) -> str:
 @input_error
 def add_birthday(args:list[str], contacts:AddressBook):
     name, birthday, = args
-    contact = contacts.find(name)
+    contact = contacts.find_by_name(name)
     if not contact:
         raise KeyError
     contact.add_birthday(birthday)
-    return UPDATED.format(name)
+    return UPDATED.format(class_name = "Contact",item_name = name)
 
 @input_error
 def add_email(args:list[str], contacts:AddressBook):
     name, email, = args
-    contact = contacts.find(name)
+    contact = contacts.find_by_name(name)
     if not contact:
         raise KeyError
     contact.add_email(email)
-    return UPDATED.format(name)
+    return UPDATED.format(class_name = "Contact",item_name = name)
 
 @input_error
 def add_address(args:list[str], contacts:AddressBook):
@@ -92,16 +94,16 @@ def add_address(args:list[str], contacts:AddressBook):
     if len(rest) == 0:
         raise ValueError
     address = " ".join(rest)
-    contact = contacts.find(name)
+    contact = contacts.find_by_name(name)
     if not contact:
         raise KeyError
     contact.add_address(address)
-    return UPDATED.format(name)
+    return UPDATED.format(class_name = "Contact",item_name = name)
 
 @input_error
 def show_birthday(args:list[str], contacts:AddressBook):
     name, = args
-    contact = contacts.find(name)
+    contact = contacts.find_by_name(name)
     if not contact:
         raise KeyError
     if not contact.birthday:
