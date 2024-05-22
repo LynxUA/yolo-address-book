@@ -47,3 +47,5 @@ class Note():
     def to_dict(self) -> dict:
         return {"text": self.__text, "tags": list(self.__tags)} if self.__text else None
     
+
+    
