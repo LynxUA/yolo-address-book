@@ -28,10 +28,13 @@ def change_contact(args:list[str], contacts:AddressBook) -> str:
 @input_error
 def phone_contact(args:list[str], contacts:AddressBook) -> str:
     name, = args
-    contact = contacts.find(name)
-    if not contact:
+    found_contacts = contacts.search_contact_by_name(name)
+    if not found_contacts:
         raise KeyError
-    return str(contact.phones)
+    phones = []
+    for contact in found_contacts:
+        phones.extend(contact.phones)
+    return ', '.join(phones)
 
 def all_contact(contacts:AddressBook) -> str:
     if not contacts.data:
