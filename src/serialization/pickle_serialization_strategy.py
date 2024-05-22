@@ -9,4 +9,3 @@ class PickleSerializationStrategy(SerializationStrategy):
 
     def deserialize(self, data):
         return pickle.loads(data)
-    
