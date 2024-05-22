@@ -8,7 +8,6 @@ class BookManager:
         self.address_book:AddressBook | None = None
         self.note_book:NoteBook | None = None
         self.opened = False
-        self.filename = filename
 
     def __enter__(self): #TODO -> tuple[AddressBook, NoteBook]:
         self.opened = True

@@ -57,7 +57,6 @@ def phone_contact(args:list[str], contacts:AddressBook) -> str:
 def all_contact(contacts:AddressBook) -> str:
     if not contacts.data:
         return INFO + " You do not have any contacts saved"
-    print('contacts', contacts.data)
     if not contacts.data:
         return INFO + " You do not have any contacts saved"
 
