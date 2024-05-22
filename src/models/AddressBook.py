@@ -1,17 +1,22 @@
 from collections import UserDict
 from datetime import date, datetime
+from src.models.Book import Book
 from src.models.Record import Record
 
-class AddressBook(UserDict[str, Record]):
+class AddressBook(Book, UserDict[str, Record]):
 
-    def add_record(self, record:Record):
-        self.data[record.name.value] = record
+    def add(self, item:Record):
+        self.data[item.name.value] = item
 
-    def find(self, record_name:str) -> Record | None:
-        return self.data.get(record_name)
+    def get(self, name:str) -> Record | None:
+        return self.data.get(name)
 
-    def delete(self, record_name:str):
-        del self.data[record_name]
+    #TODO: change impl to perform inclusive search and return list
+    def find_by_name(self, name:str) -> Record | None:
+        return self.data.get(name)
+
+    def delete(self, name:str):
+        del self.data[name]
 
     def get_upcoming_birthdays(self, range) -> list[Record]:
         upcoming_birthdays = []
