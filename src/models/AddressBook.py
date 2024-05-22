@@ -10,10 +10,10 @@ class AddressBook(UserDict[str, Record]):
     def find(self, record_name:str) -> Record | None:
         return self.data.get(record_name)
     
-    def search_contact_by_name(self, query):
+    def search_contact_by_name(self, query: str):
         results = []
-        for contact in self.contacts:
-            if query.lower() in contact.name.lower():
+        for contact in self.data.values():    
+            if query.lower() in contact.name.value.lower():
                 results.append(contact)
         return results
 
