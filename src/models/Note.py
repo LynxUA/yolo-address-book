@@ -4,11 +4,11 @@ class Note():
     def __init__(self, name:str, text:str):
         self.__name = name
         self.__text = text
-        self.__tags: set[str] = set()
+        self.tags: set[str] = set()
 
     def __str__(self) -> str:
         return (f"{self.__name}\n"
-                "\n".join(wrap(f"{self.text}\n") + wrap(", ".join(self.__tags))))
+                "\n".join(wrap(f"{self.text}\n") + wrap(", ".join(self.tags))))
 
     def __repr__(self) -> str:
         return self.__str__()
@@ -25,14 +25,25 @@ class Note():
     def text(self, text:str):
         self.__text = text
 
-    def add_tags(self, *tags):
+    def add_tags(self, *args):
+        tags, = args
         for tag in tags:
             if isinstance(tag, str):
-                self.__tags.add(tag)
+                self.tags.add(tag.strip())
 
     def remove_tags(self, *tags):
         for tag in tags:
-            self.__tags.remove(tag)
+            self.tags.remove(tag)
 
     def exists_tag(self, tag:str) -> bool:
-        return self.__tags.issuperset(tag)
+        return self.tags.issuperset(tag)
+    
+    def to_dict(self) -> dict:
+        return {"text": self.__text, "tags": list(self.tags)} if self.__text else None
+    
+    @classmethod
+    def from_dict(cls, name:str, data:dict):
+        note = cls(name, data.get("text"))
+        if data.get("tags"):
+            note.add_tags(data.get("tags"))
+        return note
