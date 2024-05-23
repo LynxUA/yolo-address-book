@@ -11,7 +11,10 @@ class AddressBook(UserDict[str, Record]):
         return self.data.get(record_name)
 
     def delete(self, record_name:str):
-        del self.data[record_name]
+        keys_to_delete = [key for key, record in self.data.items()
+                          if record.record_name == record_name]
+        for key in keys_to_delete:
+            del self.data[record_name]
 
     def get_upcoming_birthdays(self) -> list[Record]:
         upcoming_birthdays = []
