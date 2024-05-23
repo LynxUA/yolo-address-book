@@ -1,14 +1,18 @@
 from src.constants import INFO, UPDATED
 from src.models.Note import Note
 from src.models.NoteBook import NoteBook
-from src.decorators import input_error
+from src.decorators import collect_note_details, input_error
 
 
 @input_error
-def add_note(args:list[str], notes:NoteBook) -> str:
-    name, *text = args
-    notes.add(Note(name, " ".join(text)))
-    return INFO + f" Note {name} successfully added"
+def add_note(notes:NoteBook, **kwargs) -> str:
+    title = kwargs.get('title')
+    body = kwargs.get('body')
+    tags = kwargs.get('tags')
+    note = Note(title, body)
+    note.add_tags(tags)
+    notes.add(note)
+    return INFO + f" Note {title} successfully added"
 
 @input_error
 def change_note(args:list[str], notes:NoteBook) -> str:
@@ -49,6 +53,10 @@ def all_notes(notes:NoteBook) -> str:
     if not notes.data:
         return INFO + " You do not have any notes saved"
     res=""
-    for note in notes.values():
-        res += str(note)+"\n"+ "-"*30 + "\n"
-    return res.strip()
+    for title, note in notes.items():
+        res += "---------------------------------------------------------------------------------------------\n"
+        res += f"title:  |  {title}\n"
+        res += f"body:   |  {note.text}\n"
+        res += f"tags:   |  {', '.join(note.tags)}\n"
+        res += "---------------------------------------------------------------------------------------------\n"
+    return res
