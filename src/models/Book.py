@@ -1,7 +1,7 @@
 from abc import abstractmethod
 
 class Book():
-
+    """Represent storage class for items"""
     @abstractmethod
     def add(self, item):
         """Adds item to the Book if it does not exist.
