@@ -1,18 +1,31 @@
 from collections import UserDict
 from datetime import date, datetime
+from typing import List
 from src.models.Book import Book
 from src.models.Record import Record
 
 class AddressBook(Book, UserDict[str, Record]):
+     
+    def find_by_name(self, query: str) -> List[Record]:
+        """
+        Пошук контактів у книзі за заданим запитом.
+
+        Args:
+            query (str): Запит для пошуку контактів.
+
+        Returns:
+            List[Record]: Список знайдених контактів.
+        """
+        results: List[Record] = []
+        for contact in self.data.values():    
+            if query.lower() in contact.name.value.lower():
+                results.append(contact)
+        return results
 
     def add(self, item:Record):
         self.data[item.name.value] = item
 
     def get(self, name:str) -> Record | None:
-        return self.data.get(name)
-
-    #TODO: change impl to perform inclusive search and return list
-    def find_by_name(self, name:str) -> Record | None:
         return self.data.get(name)
 
     def delete(self, name:str):
