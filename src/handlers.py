@@ -60,18 +60,11 @@ def all_contact(contacts:AddressBook) -> str:
     if not contacts.data:
         return INFO + " You do not have any contacts saved"
 
-    res = (f"{'Name':<15}{'| Birthday':<13}{'| Phone':<13}{'| Email':<23}{'| Address'}\n"
-           +"-"*80 + "\n")
+    res = ""
     for name in contacts.data:
-        phones_iter = iter(contacts[name].phones)
-        birthday = contacts[name].birthday.value if contacts[name].birthday else "-"
-        email = contacts[name].email.value if contacts[name].email else "-"
-        address = contacts[name].address.value  if contacts[name].address else "-"
-        res += (f"{name: <15}| {birthday: <11}| {next(phones_iter, "-" + " "*9)}"
-                f" | {email: <20} | {address}\n")
-
-        for phone in phones_iter:
-            res += f"{' ':<15}| {' ':<11}| {phone} | {' ':<20} | {' '}\n"
+        res += "-"*80 + "\n"
+        res += str(contacts.get(name))
+        res += "-"*80 + "\n"
     return res.strip()
 
 @input_error
