@@ -1,7 +1,7 @@
 from src.constants import INFO, UPDATED
 from src.models.Note import Note
 from src.models.NoteBook import NoteBook
-from src.decorators import collect_note_details, input_error
+from src.decorators import input_error
 
 
 @input_error
@@ -49,14 +49,9 @@ def find_note(args:list[str], notes:NoteBook) -> str:
         return INFO + f" No notes with '{search_request}' in name or text were found"
     return res.strip()
 
+
 def all_notes(notes:NoteBook) -> str:
     if not notes.data:
         return INFO + " You do not have any notes saved"
-    res=""
-    for title, note in notes.items():
-        res += "---------------------------------------------------------------------------------------------\n"
-        res += f"title:  |  {title}\n"
-        res += f"body:   |  {note.text}\n"
-        res += f"tags:   |  {', '.join(note.tags)}\n"
-        res += "---------------------------------------------------------------------------------------------\n"
-    return res
+    
+    return notes.format_notes()
