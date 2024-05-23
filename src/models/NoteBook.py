@@ -25,6 +25,27 @@ class NoteBook(Book, UserDict[str, Note]):
 
     def get_by_name(self, name:str) -> Note:
         return self.data[name]
+        
+    def format_notes(self) -> str:
+        lines = []
+
+        for title, note in self.data.items():
+            lines.append(f"title:  |  {title}")
+            lines.append(f"body:   |  {note.text}")
+            lines.append(f"tags:   |  {', '.join(note.tags)}")
+        
+        max_length = max(len(line) for line in lines)
+        separator = "-" * max_length
+
+        res = ""
+        for title, note in self.data.items():
+            res += separator + "\n"
+            res += f"title:  |  {title}\n"
+            res += f"body:   |  {note.text}\n"
+            res += f"tags:   |  {', '.join(note.tags)}\n"
+            res += separator + "\n"
+        
+        return res
 
     @classmethod
     def from_dict(cls, data):

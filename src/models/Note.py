@@ -43,7 +43,7 @@ class Note():
     
     @classmethod
     def from_dict(cls, name:str, data:dict):
-        note = cls(name, data["text"])
+        note = cls(name, data.get("text"))
         if data.get("tags"):
-            note.add_tags(data["tags"])
+            note.add_tags(data.get("tags"))
         return note
