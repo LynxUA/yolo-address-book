@@ -10,8 +10,8 @@ def input_error(func):
             return INVALID_COMMAND
         except KeyError:
             return NOT_EXISTS
-        except Exception:
-            return UNKNOWN
+        # except Exception:
+        #     return UNKNOWN
     return inner
 
 #converts error to nice exit
