@@ -66,17 +66,12 @@ def all_contact(contacts:AddressBook) -> str:
     if not contacts.data:
         return INFO + " You do not have any contacts saved"
 
-    all = f"{'Name':<15}{'| Birthday':<14}{'| Phone':<13}{'| Email':<23}{'| Address'}\n" + "-"*80 + "\n"
+    res = ""
     for name in contacts.data:
-        phones_iter = contacts[name].phones.__iter__()
-        birthday = contacts[name].birthday.value if contacts[name].birthday else "-"
-        email = contacts[name].email.value if contacts[name].email else "-"
-        address = contacts[name].address.value  if contacts[name].address else "-"
-        all += f"{name: <15}| {birthday: <12}| {next(phones_iter)} | {email: <20} | {address}\n"
-
-        for phone in phones_iter:
-            all += f"{' ': <15}| {' ': <12} | {phone} | {' ': <20} | {' '}\n"
-    return all.strip()
+        res += "-"*80 + "\n"
+        res += str(contacts.get(name))
+        res += "-"*80 + "\n"
+    return res.strip()
 
 @input_error
 def add_birthday(args:list[str], contacts:AddressBook):
@@ -120,17 +115,18 @@ def show_birthday(args:list[str], contacts:AddressBook):
 
 @input_error
 def birthdays(arg, contacts:AddressBook):
-    range = int(arg[0]) if arg else 7
-    upcoming_birthdays = contacts.get_upcoming_birthdays(range)
+    bd_range = int(arg[0]) if arg else 7
+    upcoming_birthdays = contacts.get_upcoming_birthdays(bd_range)
     if not contacts.data:
         return INFO + " You do not have any contacts saved"
     if not upcoming_birthdays:
         return INFO + " There are no upcoming birthdays"
 
-    res = f"{'Name':<15}{'| Birthday':<12}{'| Phone'}\n" + "-"*42 + "\n"
+    res = f"{'Name':<15}{'| Birthday':<13}{'| Phone'}\n" + "-"*42 + "\n"
     for contact in upcoming_birthdays:
-        phones_iter = contact.phones.__iter__()
-        res += f"{contact.name.value: <15}| {contact.birthday.value:<12}| {next(phones_iter).value}\n"
+        phones_iter = iter(contact.phones)
+        res += (f"{contact.name.value:<15}| {contact.birthday.value:<11}"
+                f"| {next(phones_iter, "-" + " "*9)}\n")
         for phone in phones_iter:
-            res += f"{' ': <15}| {' ':<12}| {phone.value}\n"
+            res += f"{' ': <15}| {' ':<11}| {phone.value}\n"
     return res.strip()

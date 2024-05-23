@@ -36,7 +36,12 @@ class Record:
         self.email = Email(email)
 
     def __str__(self):
-        return f"Contact name: {self.name.value}, birthday: {self.birthday.value if self.birthday else None}, email: {self.email}, address:{self.address}, phones: {'; '.join(p.value for p in self.phones)}"
+        phones = ", ".join(map(lambda phone: phone.value, self.phones))
+        return (f"{'Name':<10}{"| "}{self.name}\n"
+                f"{'Birthday':<10}{"| "}{self.birthday}\n"
+                f"{'Phone':<10}{"| "}{phones}\n"
+                f"{'Email':<10}{"| "}{self.email}\n"
+                f"{'Address':<10}{"| "}{self.address}\n")
 
     #prints Record nicely in print(AddressBook)
     def __repr__(self) -> str:
