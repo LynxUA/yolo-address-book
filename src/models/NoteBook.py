@@ -1,6 +1,8 @@
 from collections import UserDict
+
 from src.models.Note import Note
 from src.models.Book import Book
+from src.utiles import wrap_text
 
 
 class NoteBook(Book, UserDict[str, Note]):
@@ -25,6 +27,22 @@ class NoteBook(Book, UserDict[str, Note]):
 
     def get_by_name(self, name:str) -> Note:
         return self.data[name]
+    
+    def format_notes(self) -> str:
+        max_body_length = 90
+        separator = "-" * max_body_length
+
+        res = ""
+        for title, note in self.data.items():
+            res += separator + "\n"
+            wrapped_title = wrap_text(title, max_body_length, "title:  |  ", " " * len("title:  |  "))
+            res += wrapped_title + "\n"
+            wrapped_body = wrap_text(note.text, max_body_length, "body:   |  ", " " * len("body:   |  "))
+            res += wrapped_body + "\n"
+            res += f"tags:   |  {', '.join(note.tags)}\n"
+            res += separator + "\n"
+
+        return res
 
     @classmethod
     def from_dict(cls, data):

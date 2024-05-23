@@ -1,6 +1,6 @@
 import json
 
-from src.Storate import Storage
+from src.Storage import Storage
 from src.models.AddressBook import AddressBook
 from src.models.NoteBook import NoteBook
 from src.serialization.json_serialization_strategy import JsonSerializationStrategy
