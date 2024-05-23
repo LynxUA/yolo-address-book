@@ -1,17 +1,27 @@
 from collections import UserDict
 from datetime import date, datetime
+from typing import List, Union
 from src.models.Record import Record
 
 class AddressBook(UserDict[str, Record]):
 
-    def add_record(self, record:Record):
+    def add_record(self, record: Record) -> None:
         self.data[record.name.value] = record
 
-    def find(self, record_name:str) -> Record | None:
+    def find(self, record_name:str) -> Union[Record, None]:
         return self.data.get(record_name)
-    
-    def search_contact_by_name(self, query: str):
-        results = []
+     
+    def search_contact_by_name(self, query: str) -> List[Record]:
+        """
+        Пошук контактів у книзі за заданим запитом.
+
+        Args:
+            query (str): Запит для пошуку контактів.
+
+        Returns:
+            List[Record]: Список знайдених контактів.
+        """
+        results: List[Record] = []
         for contact in self.data.values():    
             if query.lower() in contact.name.value.lower():
                 results.append(contact)
