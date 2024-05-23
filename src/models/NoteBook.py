@@ -30,21 +30,13 @@ class NoteBook(Book, UserDict[str, Note]):
     
     def format_notes(self) -> str:
         max_body_length = 90
-        lines = []
-
-        for title, note in self.data.items():
-            lines.append(f"title:  |  {title}")
-            wrapped_body = wrap_text(note.text, max_body_length, "body:   |  ", " " * len("body:   |  "))
-            lines.extend(wrapped_body.split("\n"))
-            lines.append(f"tags:   |  {', '.join(note.tags)}")
-
-        max_length = max(len(line) for line in lines)
-        separator = "-" * max_length
+        separator = "-" * max_body_length
 
         res = ""
         for title, note in self.data.items():
             res += separator + "\n"
-            res += f"title:  |  {title}\n"
+            wrapped_title = wrap_text(title, max_body_length, "title:  |  ", " " * len("title:  |  "))
+            res += wrapped_title + "\n"
             wrapped_body = wrap_text(note.text, max_body_length, "body:   |  ", " " * len("body:   |  "))
             res += wrapped_body + "\n"
             res += f"tags:   |  {', '.join(note.tags)}\n"
