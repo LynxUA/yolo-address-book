@@ -31,10 +31,12 @@ def phone_contact(args:list[str], contacts:AddressBook) -> str:
     found_contacts = contacts.search_contact_by_name(name)
     if not found_contacts:
         raise KeyError
-    phones = []
+    result = ""
     for contact in found_contacts:
-        phones.extend(contact.phones)
-    return ', '.join(phones)
+        result += f"Contact: {contact.name}\n"
+        for phone in contact.phones:
+            result += f"Phone: {phone}\n"
+    return result
 
 def all_contact(contacts:AddressBook) -> str:
     if not contacts.data:
