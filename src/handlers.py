@@ -9,11 +9,11 @@ def add_contact(args:list[str], contacts:AddressBook) -> str:
     defaults = [None, None, None, None, []]
     name, phone, email, address, *rest = (item for item, _ in zip_longest(args, defaults, fillvalue=None))
     if address and len(rest) > 0:
-        address = address + "".join(rest)
+        address = address + " " + " ".join(rest)
     if not name:
         raise ValueError
     contact = contacts.get(name)
-    msg =  UPDATED.format(class_name = "Contact",item_name = name)
+    msg =  UPDATED.format(class_name = "Contact", item_name = name)
 
     if not contact:
         contact = Record(name)
