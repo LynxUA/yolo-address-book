@@ -2,6 +2,7 @@
 import random
 from faker import Faker
 
+from src.decorators import input_error
 from src.models.Note import Note
 from src.models.NoteBook import NoteBook
 from src.models.Record import Record
@@ -15,7 +16,7 @@ def generate_tags():
     num_tags = random.randint(1, len(possible_tags))
     return random.sample(possible_tags, num_tags)
 
-
+@input_error
 def generate_contacts(args, book: AddressBook):
     number, = args
     address_book = {}
@@ -39,6 +40,7 @@ def generate_contacts(args, book: AddressBook):
 
     return INFO + f" {number} contacts successfully generated"
 
+@input_error
 def generate_notes(args, book: NoteBook):
     number, = args
     note_book = {}
