@@ -80,7 +80,14 @@ python main.py
     ```
     Приклад:
     ```
-    TODO
+    Enter a command: all
+    ---------------------------------------------------------
+    Name      | John
+    Birthday  | 01.06.1999
+    Phone     | 0985553487
+    Email     | email@example.com
+    Address   | Heroiv Maidanu str., Lviv, Ukraine, 79000
+    ---------------------------------------------------------
     ```
 0.  Виведення списку контактів в кого день народження через `range` днів
     ```sh
@@ -99,15 +106,33 @@ python main.py
     ```
     Приклад:
     ```
-    TODO
+    Enter a command: add-note
+    Enter the title of the note: Important Note
+    [INFO] Title successfully added
+    Enter the text of the note: Lorem ipsum.
+    [INFO] Text successfully added
+    Enter tags separated by commas: tag, tag1           
+    [INFO] Tags successfully added
+    [INFO] Note Lorem successfully added
     ```
 0.  Пошук нотаток
     ```sh
-    find-note
+    find-note search_query
     ```
-    Приклад:
+    `search_query` - параметр за яким буде здійснюватись пошук у заголовку або тексті нотатки. Якшо запит почиється з `#` то пошук буде здійснюватись по тегах\
+    Приклад:\
+    Всі з цих трьох команд виведуть однаковий результат
     ```
-    TODO
+    Enter a command: find-note important note
+    Enter a command: find-note ipsum
+    Enter a command: find-note #tag
+    ```
+    ```
+    ---------------------------------------------------------
+    title:  |  Important Note
+    body:   |  Lorem ipsum.
+    tags:   |  tag, tag1
+    ---------------------------------------------------------
     ```
 0.  Редагування збереженої нотатки
     ```sh
@@ -115,7 +140,13 @@ python main.py
     ```
     Приклад:
     ```
-    TODO
+    Enter the new title of the note or press Enter to keep the old one (current title: Important Note): My Note
+    [INFO] Title successfully updated
+    Enter the new text of the note or press Enter to keep the old one (current text: Lorem ipsum.): Just Lorem
+    [INFO] Text successfully updated
+    Enter new tags separated by commas or press Enter to keep the old ones (current tags: tag, tag1): important, fun
+    [INFO] Tags successfully updated
+    [INFO] The note Important Note successfully updated
     ```
 0. Закінчення роботи. Також можна скористатися `ctrl+c` і ваші дані все ще збережуться
     ```sh
