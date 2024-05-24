@@ -44,9 +44,9 @@ def parse_input_edit_note(old_note: dict):
     updated_note = {"title": title_to_be_updated, "text": body_to_be_updated, "tags": tags_to_be_updated}
     
     while True:
-        new_title = input(f"Enter the new title of the note (current title: {title_to_be_updated}): ")
+        new_title = input(f"Enter the new title of the note or press Enter to keep the old one (current title: {title_to_be_updated}): ")
         if new_title == "":
-            print(INFO + " Keep title the same as was before")
+            print(INFO + " Keep the title the same as it was before")
             break
         if new_title:
             print(INFO + " Title successfully updated")
@@ -54,7 +54,7 @@ def parse_input_edit_note(old_note: dict):
             break
         print(INVALID_COMMAND + " Title cannot be empty")
     while True:
-        new_body = input(f"Enter the new text of the note (current text: {body_to_be_updated}): ")
+        new_body = input(f"Enter the new text of the note or press Enter to keep the old one (current text: {body_to_be_updated}): ")
         if new_body == "":
             print(INFO + " Keep text the same as was before")
             break
@@ -64,9 +64,9 @@ def parse_input_edit_note(old_note: dict):
             break
         print(INVALID_COMMAND + " Text cannot be empty")
     while True:
-        new_tags = input(f"Enter new tags separated by commas (current tags: {', '.join(tags_to_be_updated)}): ")
+        new_tags = input(f"Enter new tags separated by commas or press Enter to keep the old ones (current tags: {', '.join(tags_to_be_updated)}): ")
         if new_tags == "":
-            print(INFO + " Keep tags the same as were before")
+            print(INFO + " Keep tags the same as they were before")
             break
         if new_tags:
             print(INFO + " Tags successfully updated")
