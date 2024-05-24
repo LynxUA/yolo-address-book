@@ -37,7 +37,8 @@ def find_note_to_update(args:list[str], notes:NoteBook) -> str:
          return
     if len(found_note) > 1:
         print(INFO + f" Multiple notes with '{search_request}' in name or text were found. Please specify the note you want to change")
-        return notes.format_notes(found_note)
+        print(notes.format_notes(found_note))
+        return
     return found_note
 
 @input_error
@@ -45,7 +46,7 @@ def change_note(notes:NoteBook, old_title: str, new_note: dict) -> str:
     note = Note(new_note["title"], new_note["text"])
     note.add_tags(new_note["tags"])
     notes.update(old_title, note)
-    print(INFO + " Note successfully updated")
+    print(INFO + f" Note {old_title} successfully updated")
 
 @input_error
 def delete_note(args:list[str], notes:NoteBook) -> str:
