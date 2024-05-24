@@ -1,26 +1,11 @@
 
 from prompt_toolkit import PromptSession
-from prompt_toolkit.completion import FuzzyWordCompleter
-from prompt_toolkit.shortcuts import CompleteStyle
-from prompt_toolkit.auto_suggest import AutoSuggestFromHistory
 from src.constants import *
 from src.decorators import *
 from src.handlers import *
 from src.notes_handlers import all_notes, add_note, change_note, delete_note, find_note
 from src.BookManager import BookManager
-
-@interrupt_error
-@input_error
-def parse_input(cmd_list:list[str], session:PromptSession):
-    cmd_completer = FuzzyWordCompleter(cmd_list, WORD=True)
-    user_input = session.prompt("Enter a command: ",
-                                completer=cmd_completer,
-                                complete_style=CompleteStyle.MULTI_COLUMN,
-                                reserve_space_for_menu=5,
-                                auto_suggest=AutoSuggestFromHistory())
-    cmd, *args = user_input.split()
-    cmd = cmd.strip().lower()
-    return cmd, *args
+from src.utiles import parse_input
 
 @interrupt_error
 @input_error
@@ -86,9 +71,9 @@ def main():
                 print(command_dict[command](contacts, notes, *args))
             except KeyError:
                 print(INVALID_COMMAND)
-            except SystemExit:
+            except SystemExit as se:
                 print("Goodbye!")
-                raise SystemExit
+                raise se
 
 if __name__ == "__main__":
     main()
