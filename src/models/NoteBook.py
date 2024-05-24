@@ -15,31 +15,38 @@ class NoteBook(Book, UserDict[str, Note]):
 
     def find_by_name(self, name:str) -> list[Note]:
         keys = filter(lambda key: name.lower() in key.lower(),
-                      self.data.keys())
-        return [self.data.get(key) for key in keys]
+                  self.data.keys())
+        return {key: self.data.get(key) for key in keys}
+    
+    def update(self, old_name:str, new_note:Note):
+        if old_name in self.data:
+            del self.data[old_name]
+        self.data[new_note.name] = new_note
 
     def delete(self, name:str):
         del self.data[name]
 
     def find_by_text(self, partial_text:str) -> list[Note]:
-        return list(filter(lambda note: partial_text.lower() in note.text.lower(),
-                           self.data.values()))
+        return {note.name: note for note in self.data.values() if partial_text.lower() in note.text.lower()}
+    
+    def find_by_tag(self, tag:str) -> list[Note]:
+        return {item.name: item for item in self.data.values() if tag.lower() in map(str.lower, item.tags)}
 
     def get_by_name(self, name:str) -> Note:
         return self.data[name]
     
-    def format_notes(self) -> str:
+    def format_notes(self, data: dict) -> str:
         max_body_length = 90
         separator = "-" * max_body_length
-
         res = ""
-        for title, note in self.data.items():
+        for title, note in data.items():
             res += separator + "\n"
             wrapped_title = wrap_text(title, max_body_length, "title:  |  ", " " * len("title:  |  "))
             res += wrapped_title + "\n"
             wrapped_body = wrap_text(note.text, max_body_length, "body:   |  ", " " * len("body:   |  "))
             res += wrapped_body + "\n"
-            res += f"tags:   |  {', '.join(note.tags)}\n"
+            wrapped_tags = wrap_text(", ".join(note.tags), max_body_length, "tags:   |  ", " " * len("tags:   |  "))
+            res += wrapped_tags + "\n"
             res += separator + "\n"
 
         return res
