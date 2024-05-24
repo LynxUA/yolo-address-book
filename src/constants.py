@@ -18,7 +18,13 @@ add-birthday name DD.MM.YYYY                            : add or update a birthd
 add-email name email                                    : add or update an email for the contact
 add-address name address                                : add or update an address for the contact
 show-birthday username                                  : show birthday of the contact
+delete name                                             :
 birthdays range                                         : show upcoming birthdays in the next 7 days or, if you provide range, in the next range days
+add-note
+find-note
+all-notes
+change-note
+delete-note
 close, exit                                             : prints "Good bye!" and finishes bot
 help                                                    : prints this help"""
 USE_HELP = "Use 'help' for more information"
