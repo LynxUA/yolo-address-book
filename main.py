@@ -1,11 +1,11 @@
 
 
+from src.faker_generator import generate_contacts, generate_notes
 from src.constants import *
 from src.decorators import *
 from src.handlers import *
 from src.notes_handlers import all_notes, add_note_flow, change_note_flow, delete_note, find_note
 from src.BookManager import BookManager
-from src.utiles import parse_input_add_note
 
 @interrupt_error
 @input_error
@@ -37,6 +37,8 @@ def main():
         "all-notes": lambda contacts, notes, *args: all_notes(notes),
         "change-note": lambda contacts, notes, *args: change_note_flow(args, notes),
         "delete-note": lambda contacts, notes, *args: delete_note(args, notes),
+        "generate-contacts": lambda contacts, notes, *args: generate_contacts(args, contacts),
+        "generate-notes": lambda contacts, notes, *args: generate_notes(args, notes),
         "help": lambda contacts, notes, *args: HELP,
     }
     with BookManager("address_book.json") as (contacts, notes):

@@ -1,5 +1,3 @@
-from textwrap import wrap
-
 class Note():
     def __init__(self, name:str, text:str):
         self.__name = name

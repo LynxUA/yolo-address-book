@@ -24,6 +24,8 @@ find-note [search_str] or [#tag]                        : find note which contai
 all-notes                                               : prints all saved notes
 change-note [search words]                              : updates existing note. You will see the multy-step dialog to find and update note
 delete-note title                                       : delete existing note
+generate-contacts [number]                              : generates random contacts. You can specify the number of contacts to generate
+generate-notes [number]                                 : generates random notes. You can specify the number of notes to generate
 close, exit                                             : prints "Good bye!" and finishes bot
 help                                                    : prints this help"""
 
