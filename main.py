@@ -31,6 +31,7 @@ def main():
         "add-email": lambda contacts, notes,*args: add_email(args, contacts),
         "add-address": lambda contacts, notes,*args: add_address(args, contacts),
         "show-birthday": lambda contacts, notes, *args: show_birthday(args, contacts),
+        "delete": lambda contacts, *args: delete_contact(args, contacts),
         "birthdays": lambda contacts, notes, *args: birthdays(args, contacts),
         "add-note": lambda _, notes, *args: add_note_flow(notes),
         "find-note": lambda contacts, notes, *args: find_note(args, notes),

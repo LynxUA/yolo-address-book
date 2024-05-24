@@ -74,6 +74,12 @@ def all_contact(contacts:AddressBook) -> str:
     return res.strip()
 
 @input_error
+def delete_contact(args: list[str], contacts: AddressBook):
+    name, = args
+    contacts.delete(name)
+    return UPDATED.format(name)
+
+@input_error
 def add_birthday(args:list[str], contacts:AddressBook):
     name, birthday, = args
     contact = contacts.get(name)

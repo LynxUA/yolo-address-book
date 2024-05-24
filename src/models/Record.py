@@ -46,7 +46,7 @@ class Record:
     #prints Record nicely in print(AddressBook)
     def __repr__(self) -> str:
         return self.__str__()
-    
+
     #converts Record to dict for json
     @classmethod
     def from_dict(cls, name, data: dict):
@@ -74,4 +74,3 @@ class Record:
         if self.address:
             result["address"] = self.address.value
         return result
-
