@@ -41,50 +41,124 @@
     pip install -r requirements.txt
     ```
 
-### Підготовка директорії для даних
+### Збереження даних
 
-4. Створити директорію для зберігання даних:
-    ```sh
-    mkdir src
-    touch src/contacts.json
-    touch src/notes.json
-    ```
+4. Файли розширень .bin та/або .json можуть бути створені в процесі користування помічником, в них зберігатимуться ваші дані
 
-### **Заповнення початкових даних за допомогою мокера**
+<!-- ### **Заповнення початкових даних за допомогою мокера**
 
 5. **Заповнити початкові дані фіктивними значеннями:**
     ```sh
     python mocker.py
-    ```
+    ``` -->
 
 ## Використання
 
-Запустіть застосунок, використовуючи командний рядок. Ось список доступних команд:
+Запустіть застосунок, використовуючи командний рядок. 
+```sh
+python main.py
+```
+Ось список доступних команд:
 
-### Додавання нотатки
-
-1.  ```sh
-    python main.py add_note
-
+1. Додавання нотатки
+    ```sh
+    add-note
+    ```
 ### Пошук нотаток за тегом
 
 2.  ```sh
-    python main.py search_note
+    search_note
 
 ### Сортування нотаток за тегами
 
 3.  ```sh
-    python main.py sort_notes
-
+    sort_notes
+    ```
 ### Додавання контакту
-
 4.  ```sh
-    python main.py add_contact
-
+    add_contact
+    ```
 ### Пошук контактів
 
-5. ```sh
-python main.py search_contact
+5.  ```sh
+    search_contact
+    ```
+
+1.  ```sh
+    help
+    ```
+
+1.  ```sh
+    hello
+    ```
+
+1.  ```sh
+    close
+    ```
+
+1.  ```sh
+    exit
+    ```
+
+1.  ```sh
+    add
+    ```
+
+1.  ```sh
+    all
+    ```
+
+1.  ```sh
+    change
+    ```
+
+1.  ```sh
+    phone
+    ```
+
+1.  ```sh
+    add-birthday
+    ```
+
+1.  ```sh
+    add-email
+    ```
+
+1.  ```sh
+    add-address
+    ```
+
+1.  ```sh
+    show-birthday
+    ```
+
+1.  ```sh
+    delete
+    ```
+
+1.  ```sh
+    birthdays
+    ```
+
+1.  ```sh
+    add-note
+    ```
+
+1.  ```sh
+    find-note
+    ```
+
+1.  ```sh
+    all-notes
+    ```
+
+1.  ```sh
+    change-note
+    ```
+
+1.  ```sh
+    delete-note
+    ```
 
 
 ### Пояснення
