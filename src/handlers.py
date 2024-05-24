@@ -63,8 +63,6 @@ def phone_contact(args:list[str], contacts:AddressBook) -> str:
 def all_contact(contacts:AddressBook) -> str:
     if not contacts.data:
         return INFO + " You do not have any contacts saved"
-    if not contacts.data:
-        return INFO + " You do not have any contacts saved"
 
     res = ""
     for name in contacts.data:
@@ -72,6 +70,12 @@ def all_contact(contacts:AddressBook) -> str:
         res += str(contacts.get(name))
         res += "-"*80 + "\n"
     return res.strip()
+
+@input_error
+def delete_contact(args: list[str], contacts: AddressBook):
+    name, = args
+    contacts.delete(name)
+    return UPDATED.format(name)
 
 @input_error
 def add_birthday(args:list[str], contacts:AddressBook):

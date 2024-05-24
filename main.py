@@ -1,43 +1,12 @@
 
 from prompt_toolkit import PromptSession
+from src.faker_generator import generate_contacts, generate_notes
 from src.constants import *
 from src.decorators import *
 from src.handlers import *
-from src.notes_handlers import all_notes, add_note, change_note, delete_note, find_note
+from src.notes_handlers import all_notes, add_note_flow, change_note_flow, delete_note, find_note
 from src.BookManager import BookManager
 from src.utiles import parse_input
-
-@interrupt_error
-@input_error
-def parse_input_add_note(nots, callback):
-    args = {}
-    while True:
-        title = input("Enter the title of the note: ")
-        if title:
-            print(INFO + " Title successfully added")
-            break
-        print(INVALID_COMMAND + " Title cannot be empty")
-
-    while True:
-        body = input("Enter the text of the note: ")
-        if body:
-            print(INFO + " Text successfully added")
-            break
-        print(INVALID_COMMAND + " Text cannot be empty")
-
-    while True:
-        tags = input("Enter tags separated by commas: ")
-        if tags:
-            print(INFO + " Tags successfully added")
-            break
-        print(INVALID_COMMAND + " Tags cannot be empty")
-
-    args['title'] = title
-    args['body'] = body
-    args['tags'] = tags.split(",")
-
-    return callback(nots, **args)
-
 
 def main():
     print(BANNER)
@@ -55,12 +24,15 @@ def main():
         "add-email": lambda contacts, _,*args: add_email(args, contacts),
         "add-address": lambda contacts, _,*args: add_address(args, contacts),
         "show-birthday": lambda contacts, _, *args: show_birthday(args, contacts),
+        "delete": lambda contacts, _, *args: delete_contact(args, contacts),
         "birthdays": lambda contacts, _, *args: birthdays(args, contacts),
-        "add-note": lambda _, notes, *__: parse_input_add_note(notes, add_note),
+        "add-note": lambda _, notes, *__: add_note_flow(notes),
         "find-note": lambda _, notes, *args: find_note(args, notes),
         "all-notes": lambda _, notes, *__: all_notes(notes),
-        "change-note": lambda _, notes, *args: change_note(args, notes),
+        "change-note": lambda _, notes, *args: change_note_flow(args, notes),
         "delete-note": lambda _, notes, *args: delete_note(args, notes),
+        "generate-contacts": lambda contacts, _, *args: generate_contacts(args, contacts),
+        "generate-notes": lambda _, notes, *args: generate_notes(args, notes),
         "help": lambda *_: HELP,
     }
     with BookManager("address_book.json") as (contacts, notes):

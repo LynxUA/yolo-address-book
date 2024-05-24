@@ -1,5 +1,3 @@
-from textwrap import wrap
-
 class Note():
     def __init__(self, name:str, text:str):
         self.__name = name
@@ -7,8 +5,7 @@ class Note():
         self.tags: set[str] = set()
 
     def __str__(self) -> str:
-        return (f"{self.__name}\n"
-                "\n".join(wrap(f"{self.text}\n") + wrap(", ".join(self.tags))))
+        return f"Note title: {self.__name}, body: {self.text}, tags: {', '.join(self.tags)}"
 
     def __repr__(self) -> str:
         return self.__str__()
