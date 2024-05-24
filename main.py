@@ -3,7 +3,7 @@
 from src.constants import *
 from src.decorators import *
 from src.handlers import *
-from src.notes_handlers import all_notes, add_note, change_note_flow, delete_note, find_note
+from src.notes_handlers import all_notes, add_note_flow, change_note_flow, delete_note, find_note
 from src.BookManager import BookManager
 from src.utiles import parse_input_add_note
 
@@ -32,7 +32,7 @@ def main():
         "add-address": lambda contacts, notes,*args: add_address(args, contacts),
         "show-birthday": lambda contacts, notes, *args: show_birthday(args, contacts),
         "birthdays": lambda contacts, notes, *args: birthdays(args, contacts),
-        "add-note": lambda _, notes, *args: parse_input_add_note(notes, add_note),
+        "add-note": lambda _, notes, *args: add_note_flow(notes),
         "find-note": lambda contacts, notes, *args: find_note(args, notes),
         "all-notes": lambda contacts, notes, *args: all_notes(notes),
         "change-note": lambda contacts, notes, *args: change_note_flow(args, notes),

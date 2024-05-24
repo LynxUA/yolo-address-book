@@ -2,14 +2,18 @@ from src.constants import INFO
 from src.models.Note import Note
 from src.models.NoteBook import NoteBook
 from src.decorators import input_error
-from src.utiles import parse_input_edit_note
+from src.utiles import parse_input_add_note, parse_input_edit_note
+
 
 
 @input_error
-def add_note(notes:NoteBook, **kwargs) -> str:
-    title = kwargs.get('title')
-    body = kwargs.get('body')
-    tags = kwargs.get('tags')
+def add_note_flow(notes:NoteBook) -> str:
+    created_note = parse_input_add_note()
+    
+    title = created_note.get('title')
+    body = created_note.get('body')
+    tags = created_note.get('tags')
+
     note = Note(title, body)
     note.add_tags(tags)
     notes.add(note)
@@ -17,36 +21,31 @@ def add_note(notes:NoteBook, **kwargs) -> str:
 
 @input_error
 def change_note_flow(args:list[str], notes:NoteBook) -> str:
-    found_note = find_note_to_update(args, notes)
+    search_request = " ".join(args)
+    found_note = find_note_to_update(search_request, notes)
     if not found_note:
-        return
-    print(INFO + " Note to be updated:")
+        return INFO + f" No notes with '{search_request}' in name or text were found"
+    if len(found_note) > 1:
+        print(notes.format_notes(found_note))
+        return INFO + f" Multiple notes with '{search_request}' in name or text were found. Please specify the note you want to change"
     print(notes.format_notes(found_note))
     updated_note = parse_input_edit_note(found_note)
     if not updated_note:
-        return
+        return INFO + " No changes were made"
     old_title = list(found_note.keys())[0]
-    change_note(notes, old_title, updated_note)
+    return change_note(notes, old_title, updated_note)
+     
 
 @input_error
-def find_note_to_update(args:list[str], notes:NoteBook) -> str:
-    search_request = " ".join(args)
-    found_note: dict = find_note_data(search_request, notes)
-    if not found_note:
-         print(INFO + f" No notes with '{search_request}' in name or text were found")
-         return
-    if len(found_note) > 1:
-        print(INFO + f" Multiple notes with '{search_request}' in name or text were found. Please specify the note you want to change")
-        print(notes.format_notes(found_note))
-        return
-    return found_note
+def find_note_to_update(search_request: str, notes:NoteBook) -> str:
+    return find_note_data(search_request, notes)
 
 @input_error
 def change_note(notes:NoteBook, old_title: str, new_note: dict) -> str:
     note = Note(new_note["title"], new_note["text"])
     note.add_tags(new_note["tags"])
     notes.update(old_title, note)
-    print(INFO + f" Note {old_title} successfully updated")
+    return INFO + f" The note {old_title} successfully updated"
 
 @input_error
 def delete_note(args:list[str], notes:NoteBook) -> str:
