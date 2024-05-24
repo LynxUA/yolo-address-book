@@ -1,8 +1,8 @@
 
 from src.AddressBookManager import AddressBookManager
-from src.models.AddressBook import AddressBook
 from src.constants import *
 from src.decorators import *
+from src.handlers import *
 
 @interrupt_error
 @input_error

@@ -10,7 +10,7 @@ class AddressBook(UserDict[str, Record]):
     def find(self, record_name:str) -> Record | None:
         return self.data.get(record_name)
 
-    def delete_contact(self, record_name:str) -> None:
+    def delete(self, record_name:str) -> None:
         """
     Видаляє контакт із адресної книги за його іменем.
 
