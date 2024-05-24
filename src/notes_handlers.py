@@ -22,7 +22,7 @@ def add_note_flow(notes:NoteBook) -> str:
 @input_error
 def change_note_flow(args:list[str], notes:NoteBook) -> str:
     search_request = " ".join(args)
-    found_note = find_note_to_update(search_request, notes)
+    found_note = find_note_data(search_request, notes)
     if not found_note:
         return INFO + f" No notes with '{search_request}' in name or text were found"
     if len(found_note) > 1:
@@ -34,11 +34,7 @@ def change_note_flow(args:list[str], notes:NoteBook) -> str:
         return INFO + " No changes were made"
     old_title = list(found_note.keys())[0]
     return change_note(notes, old_title, updated_note)
-     
 
-@input_error
-def find_note_to_update(search_request: str, notes:NoteBook) -> str:
-    return find_note_data(search_request, notes)
 
 @input_error
 def change_note(notes:NoteBook, old_title: str, new_note: dict) -> str:
