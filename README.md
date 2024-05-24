@@ -45,13 +45,6 @@
 
 4. Файли розширень .bin та/або .json можуть бути створені в процесі користування помічником, в них зберігатимуться ваші дані
 
-### Заповнення початкових даних за допомогою мокера
-
-5. **Заповнити початкові дані фіктивними значеннями:**
-    ```sh
-    python mocker.py
-    ```
-
 ## Використання
 
 Запустіть застосунок, використовуючи командний рядок. 
@@ -148,7 +141,25 @@ python main.py
     [INFO] Tags successfully updated
     [INFO] The note Important Note successfully updated
     ```
+0. Генерація тестових даних у кількості `number`
+    >Максимум 50 за раз
+    ```
+    generate-contacts number
+    generate-notes number
+    ```
+    Приклад:
+    ```
+    Enter a command: generate-contacts 2
+    [INFO] 2 contacts successfully generated
+    Enter a command: generate-notes 5
+    [INFO] 5 notes successfully generated
+    ```
 0. Закінчення роботи. Також можна скористатися `ctrl+c` і ваші дані все ще збережуться
     ```sh
     close | exit
     ```
+
+## Вимоги для роботи помічника
+- використання консолі bash або powershell
+- python 3.12.2
+- встановлення залежностей з `requirements.txt`
