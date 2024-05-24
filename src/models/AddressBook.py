@@ -10,7 +10,16 @@ class AddressBook(UserDict[str, Record]):
     def find(self, record_name:str) -> Record | None:
         return self.data.get(record_name)
 
-    def delete(self, record_name:str):
+    def delete_contact(self, record_name:str) -> None:
+        """
+    Видаляє контакт із адресної книги за його іменем.
+
+    Args:
+        record_name (str): Ім'я контакту, який потрібно видалити.
+
+    Returns:
+        None
+    """
         del self.data[record_name]
 
     def get_upcoming_birthdays(self) -> list[Record]:

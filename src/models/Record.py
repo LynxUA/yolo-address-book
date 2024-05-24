@@ -41,3 +41,4 @@ class Record:
     #prints Record nicely in print(AddressBook)
     def __repr__(self) -> str:
         return self.__str__()
+    

@@ -1,8 +1,8 @@
 
 from src.AddressBookManager import AddressBookManager
+from src.models.AddressBook import AddressBook
 from src.constants import *
 from src.decorators import *
-from src.handlers import *
 
 @interrupt_error
 @input_error
@@ -24,6 +24,7 @@ def main():
         "add": lambda contacts, *args: add_contact(args, contacts),
         "all": lambda contacts, *args: all_contact(contacts),
         "change": lambda contacts, *args: change_contact(args, contacts),
+        "delete": lambda contacts, *args: delete_contact(args, contacts),
         "phone": lambda contacts, *args: phone_contact(args, contacts),
         "add-birthday": lambda contacts, *args: add_birthday(args, contacts),
         "show-birthday": lambda contacts, *args: show_birthday(args, contacts),
