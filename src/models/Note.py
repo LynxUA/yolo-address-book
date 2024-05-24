@@ -27,13 +27,6 @@ class Note():
         for tag in tags:
             if isinstance(tag, str):
                 self.tags.add(tag.strip())
-
-    def remove_tags(self, *tags):
-        for tag in tags:
-            self.tags.remove(tag)
-
-    def exists_tag(self, tag:str) -> bool:
-        return self.tags.issuperset(tag)
     
     def to_dict(self) -> dict:
         return {"text": self.__text, "tags": list(self.tags)} if self.__text else None

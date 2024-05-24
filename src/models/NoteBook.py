@@ -20,7 +20,7 @@ class NoteBook(Book, UserDict[str, Note]):
     
     def update(self, old_name:str, new_note:Note):
         if old_name in self.data:
-            del self.data[old_name]
+            self.delete(old_name)
         self.data[new_note.name] = new_note
 
     def delete(self, name:str):
