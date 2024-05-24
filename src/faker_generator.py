@@ -18,10 +18,13 @@ def generate_tags():
 
 @input_error
 def generate_contacts(args, book: AddressBook):
-    number, = args
+    max_contacts = 50
+    number = int(args[0])
+    if number > max_contacts:
+            return INFO + f"Be merciful, don't generate more than {max_contacts} contacts at once!"
     address_book = {}
 
-    for _ in range(int(number)):
+    for _ in range(number):
         name = fake.first_name()
 
         address_book[name] = {
@@ -42,10 +45,14 @@ def generate_contacts(args, book: AddressBook):
 
 @input_error
 def generate_notes(args, book: NoteBook):
-    number, = args
+    max_notes = 50
+    number = int(args[0])
+    if number > max_notes:
+        return INFO + f"Be merciful, don't generate more than {max_notes} notes at once!"
+    
     note_book = {}
 
-    for _ in range(int(number)):
+    for _ in range(number):
         title = fake.word().capitalize()
 
         note_book[title] = {
