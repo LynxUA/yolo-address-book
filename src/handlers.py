@@ -1,5 +1,5 @@
 from itertools import zip_longest
-from src.constants import ERROR, INFO, UPDATED
+from src.constants import DELETED, ERROR, INFO, UPDATED
 from src.decorators import input_error
 from src.models.AddressBook import AddressBook
 from src.models.Record import Record
@@ -75,7 +75,7 @@ def all_contact(contacts:AddressBook) -> str:
 def delete_contact(args: list[str], contacts: AddressBook):
     name, = args
     contacts.delete(name)
-    return UPDATED.format(name)
+    return DELETED.format(class_name = "Contact", item_name="name")
 
 @input_error
 def add_birthday(args:list[str], contacts:AddressBook):
