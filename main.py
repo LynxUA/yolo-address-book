@@ -3,8 +3,9 @@
 from src.constants import *
 from src.decorators import *
 from src.handlers import *
-from src.notes_handlers import all_notes, add_note, change_note, delete_note, find_note
+from src.notes_handlers import all_notes, add_note_flow, change_note_flow, delete_note, find_note
 from src.BookManager import BookManager
+from src.utiles import parse_input_add_note
 
 @interrupt_error
 @input_error
@@ -13,36 +14,6 @@ def parse_input():
     cmd, *args = user_input.split()
     cmd = cmd.strip().lower()
     return cmd, *args
-
-def parse_input_add_note(nots, callback):
-    args = {}
-    while True:
-        title = input("Enter the title of the note: ")
-        if title:
-            print(INFO + " Title successfully added")
-            break
-        print(INVALID_COMMAND + " Title cannot be empty")
-
-    while True:
-        body = input("Enter the text of the note: ")
-        if body:
-            print(INFO + " Text successfully added")
-            break
-        print(INVALID_COMMAND + " Text cannot be empty")
-
-    while True:
-        tags = input("Enter tags separated by commas: ")
-        if tags:
-            print(INFO + " Tags successfully added")
-            break
-        print(INVALID_COMMAND + " Tags cannot be empty")
-
-    args['title'] = title
-    args['body'] = body
-    args['tags'] = tags.split(",")
-
-    return callback(nots, **args)
-
 
 def main():
     print(BANNER)
@@ -61,10 +32,10 @@ def main():
         "add-address": lambda contacts, notes,*args: add_address(args, contacts),
         "show-birthday": lambda contacts, notes, *args: show_birthday(args, contacts),
         "birthdays": lambda contacts, notes, *args: birthdays(args, contacts),
-        "add-note": lambda _, notes, *args: parse_input_add_note(notes, add_note),
+        "add-note": lambda _, notes, *args: add_note_flow(notes),
         "find-note": lambda contacts, notes, *args: find_note(args, notes),
         "all-notes": lambda contacts, notes, *args: all_notes(notes),
-        "change-note": lambda contacts, notes, *args: change_note(args, notes),
+        "change-note": lambda contacts, notes, *args: change_note_flow(args, notes),
         "delete-note": lambda contacts, notes, *args: delete_note(args, notes),
         "help": lambda contacts, notes, *args: HELP,
     }

@@ -20,9 +20,9 @@ add-address name address                                : add or update an addre
 show-birthday username                                  : show birthday of the contact
 birthdays [range]                                       : show upcoming birthdays in the next 7 days or, if you provide range, in the next range days
 add-note                                                : saves new note. This command will ask you to enter title, text and tags each separately
-find-note search_str                                    : find note which contains search_str in name or text
+find-note [search_str] or [#tag]                        : find note which contains search_str in name or text
 all-notes                                               : prints all saved notes
-change-note title body                                  : updates existing note
+change-note [search words]                              : updates existing note. You will see the multy-step dialog to find and update note
 delete-note title                                       : delete existing note
 close, exit                                             : prints "Good bye!" and finishes bot
 help                                                    : prints this help"""

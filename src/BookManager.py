@@ -41,4 +41,3 @@ class BookManager(Storage):
                 super().save(data_to_save)
 
 
-
